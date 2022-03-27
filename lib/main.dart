@@ -60,6 +60,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   static Future<User?> loginUsingEmailPassword(
       {required String email,
       required String password,
@@ -81,8 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //text field controller
-    TextEditingController _emailController = TextEditingController();
-    TextEditingController _passwordController = TextEditingController();
+
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -109,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 24.0,
           ),
-          TextField(
+          TextFormField(
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(
             height: 26.0,
           ),
-          TextField(
+          TextFormField(
             controller: _passwordController,
             obscureText: true,
             decoration: const InputDecoration(
@@ -150,7 +151,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     email: _emailController.text,
                     password: _passwordController.text,
                     context: context);
-                print(user);
                 if (user != null) {
                   Navigator.of(context).pushReplacement(
                       MaterialPageRoute(builder: (context) => ProfileScreen()));
